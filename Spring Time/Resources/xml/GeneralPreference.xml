@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+  
+    <EditTextPreference
+        android:title="@string/LocationPrefLabel"
+        android:key="@string/LocationPrefKey"
+        android:defaultValue="@string/LocationPrefDefault"
+        android:inputType="text"
+        android:singleLine="true" />
+
+  <ListPreference
+    android:key="@string/TempPrefKey"
+    android:title="@string/TempPrefTitle"
+    android:entries="@array/TempEntriesPref"
+    android:entryValues="@array/TempValuesPref"
+    android:dialogTitle="@string/TempPrefDialogTitle"
+    android:defaultValue="@string/TempPrefDefault"></ListPreference>
+  
+  
+</PreferenceScreen>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Hello">Hello World</string>
+    <string name="ApplicationName">Spring Time</string>
+    <string name="Refresh">Refresh</string>
+    <string name="OpenWeatherKey">1f19e98ca07882ea323e004b0081b422</string>
+    <string name="Settings">Settings</string>
+    <string name="ViewLocation">View Location</string>
+  <string name="ShareWeather">Share</string>
+  
+  <!--Preferences-->
+  <!--Location Preferences-->
+  <string name="LocationPrefLabel">Location</string>
+  <string name="LocationPrefKey">st_Location</string>
+  <string name="LocationPrefDefault">76006</string>
+  
+  <!--Temperature Units Preferences-->
+  <string name="TempPrefKey">st_TempUnits</string>
+  <string name="TempPrefTitle">Temperature Units</string>
+  <string name="TempPrefDialogTitle">Temperature Units</string>
+  <string name="TempPrefDefault">Metric</string>
+  <string name="TempPrefMetric">Metric</string>
+  <string name="TempPrefImperial">Imperial</string>
+
+  <string-array name="TempEntriesPref">
+    <item>Metric</item>
+    <item>Imperial</item>
+  </string-array>
+
+  <string-array name="TempValuesPref">
+    <item>Metric</item>
+    <item>Imperial</item>
+  </string-array>
+  
+  
+</resources>
