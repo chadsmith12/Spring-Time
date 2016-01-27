@@ -1,36 +1,30 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
+using Android.Preferences;
 using Android.Views;
 using Android.Widget;
-using System.Threading.Tasks;
-using Android.Content.PM;
-using Android.Preferences;
-using Java.Lang;
-using Java.Util;
-using Spring_Time.Resources;
-using Uri = Android.Net.Uri;
+using Spring_Time.APIJsonModels;
 
 namespace Spring_Time
 {
     public class MainFragment : Fragment
     {
-        private List<string> _listItems;
-        private ArrayAdapter<string> _forecastAdapter;
+        #region Private Fields
+        private List<ForecastInfo> _listItems;
+        private ForecastAdapter _forecastAdapter;
+        #endregion
+
+        #region Constructors
         public MainFragment()
         {
             
         }
+        #endregion
 
+        #region Android Lifecycle Methods
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -67,6 +61,7 @@ namespace Spring_Time
                 return true;
             }
 
+            // view location on the map
             if (id == Resource.Id.action_location)
             {
                 Intents.StartMap(Activity);
@@ -81,29 +76,40 @@ namespace Spring_Time
             // Use this to return your custom view for this Fragment
             var rootView = inflater.Inflate(Resource.Layout.MainFragment, container, false);
 
-            _listItems = new List<string>();
+            _listItems = new List<ForecastInfo>();
 
+            //SetForecastInfo();
             // init the array adapter for the list items
-            _forecastAdapter = new ArrayAdapter<string>(Activity, Resource.Layout.ListItemLayout, Resource.Id.listItemForecastText, _listItems);
+            _forecastAdapter = new ForecastAdapter(Activity, _listItems);
             // find the list view and set it to the forecastAdapter items
             var forecastList = (ListView) rootView.FindViewById(Resource.Id.listViewForecast);
             forecastList.Adapter = _forecastAdapter;
 
-            forecastList.ItemClick += ForecastListOnItemClick;
+            forecastList.ItemClick += ListItemOnClick;
             
             return rootView;
         }
+        #endregion
 
-        private void ForecastListOnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
+        #region Private Methods                
+        /// <summary>
+        /// Lists the item on click.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="itemClickEventArgs">The <see cref="AdapterView.ItemClickEventArgs"/> instance containing the event data.</param>
+        private void ListItemOnClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
             var item = _forecastAdapter.GetItem(itemClickEventArgs.Position);
             var detailIntent = new Intent(Activity, typeof(DetailActivity));
-            detailIntent.PutExtra(Intents.ExtraText, item);
+            detailIntent.PutExtra(Intents.ExtraText, item.ToString());
 
             StartActivity(detailIntent);
         }
 
-        public async Task SetForecastInfo()
+        /// <summary>
+        /// Sets the forecast information.
+        /// </summary>
+        private async void SetForecastInfo()
         {
             // get the weather task ready to get task for 7 das
             var task = new FetchWeatherTask(7);
@@ -111,9 +117,6 @@ namespace Spring_Time
             // get the location and units preferences for this data
             var prefs = PreferenceManager.GetDefaultSharedPreferences(Activity);
             var location = prefs.GetString(GetString(Resource.String.LocationPrefKey), GetString(Resource.String.LocationPrefDefault));
-            var units = prefs.GetString(GetString(Resource.String.TempPrefKey), GetString(Resource.String.LocationPrefDefault));
-
-            var newData = new List<string>();
 
             // get the latest weather forecast
             await task.ExecuteAsync(location);
@@ -121,19 +124,8 @@ namespace Spring_Time
             if (task.IsSuccessful)
             {
                 var data = task.ForecastData;
-                foreach (var item in data.Forecast)
-                {
-                    var temperature = item.Temperature.DayTemperature;
-                    if (units.Equals(GetString(Resource.String.TempPrefImperial)))
-                    {
-                        temperature = Converter.CelsiusToFahrenheit(temperature);
-                    }
-
-                    newData.Add($"{item.Date.ToString("ddd, MMMM dd")} / {item.Details.Type} / {System.Math.Round(temperature)}");
-                }
-
-                // set all the data and set the adapter
-                _listItems = newData;
+                _listItems = data.Forecast;
+                
                 _forecastAdapter.Clear();
                 _forecastAdapter.AddAll(_listItems);
             }
@@ -144,12 +136,14 @@ namespace Spring_Time
                 var alert = builder.Create();
                 alert.SetTitle("Error: " + task.ResponseError.Code);
                 alert.SetMessage("I'm sorry, there was an issue getting the weather: " + task.ResponseError.ErrorMessage);
-                alert.SetButton("OK", (sender, args) => {});
+                alert.SetButton("OK", (sender, args) => { });
 
                 alert.Show();
             }
-            
+
         }
+
+        #endregion
 
     }
 }

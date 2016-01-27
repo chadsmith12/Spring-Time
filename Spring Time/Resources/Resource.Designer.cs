@@ -104,14 +104,14 @@ namespace Spring_Time
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090004
-			public const int action_location = 2131296260;
+			// aapt resource value: 0x7f09000a
+			public const int action_location = 2131296266;
 			
-			// aapt resource value: 0x7f090005
-			public const int action_settings = 2131296261;
+			// aapt resource value: 0x7f09000b
+			public const int action_settings = 2131296267;
 			
-			// aapt resource value: 0x7f090006
-			public const int action_share = 2131296262;
+			// aapt resource value: 0x7f09000c
+			public const int action_share = 2131296268;
 			
 			// aapt resource value: 0x7f090000
 			public const int container = 2131296256;
@@ -119,14 +119,32 @@ namespace Spring_Time
 			// aapt resource value: 0x7f090001
 			public const int detailsTextView = 2131296257;
 			
-			// aapt resource value: 0x7f090002
-			public const int listItemForecastText = 2131296258;
+			// aapt resource value: 0x7f090006
+			public const int linearLayout1 = 2131296262;
 			
-			// aapt resource value: 0x7f090003
-			public const int listViewForecast = 2131296259;
+			// aapt resource value: 0x7f090005
+			public const int listItemDateTextView = 2131296261;
+			
+			// aapt resource value: 0x7f090004
+			public const int listItemForecastTextView = 2131296260;
 			
 			// aapt resource value: 0x7f090007
-			public const int refresh_weather = 2131296263;
+			public const int listItemHighTextView = 2131296263;
+			
+			// aapt resource value: 0x7f090002
+			public const int listItemIcon = 2131296258;
+			
+			// aapt resource value: 0x7f090003
+			public const int listItemLayoutDay = 2131296259;
+			
+			// aapt resource value: 0x7f090008
+			public const int listItemLowTextView = 2131296264;
+			
+			// aapt resource value: 0x7f090009
+			public const int listViewForecast = 2131296265;
+			
+			// aapt resource value: 0x7f09000d
+			public const int refresh_weather = 2131296269;
 			
 			static Id()
 			{
@@ -151,10 +169,13 @@ namespace Spring_Time
 			public const int ListItemLayout = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Main = 2130903043;
+			public const int ListItemTodayLayout = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int MainFragment = 2130903044;
+			public const int Main = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int MainFragment = 2130903045;
 			
 			static Layout()
 			{
@@ -190,6 +211,9 @@ namespace Spring_Time
 			
 			// aapt resource value: 0x7f060001
 			public const int ApplicationName = 2131099649;
+			
+			// aapt resource value: 0x7f060010
+			public const int FormatTemperature = 2131099664;
 			
 			// aapt resource value: 0x7f060000
 			public const int Hello = 2131099648;

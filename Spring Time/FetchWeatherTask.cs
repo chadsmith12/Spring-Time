@@ -48,7 +48,7 @@ namespace Spring_Time
         /// <value>
         /// The mode.
         /// </value>
-        public string Mode { get; set; } = "JSON";
+        public string Mode { get; set; } = "json";
 
         /// <summary>
         /// Gets or sets the query.

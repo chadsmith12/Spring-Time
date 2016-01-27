@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/listItemForecastText"
-    android:minHeight="@dimen/list_item_min_height" />
+    android:gravity="center_vertical"
+    android:minHeight="@android:dimen/notification_large_icon_height"
+    android:orientation="horizontal"
+    android:padding="16dp">
+<!--Weather Icon-->
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_height="match_parent"
+        android:id="@+id/listItemIcon"
+        android:layout_width="wrap_content" />
+<!--middle forecast layout-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/listItemLayoutDay"
+        android:layout_weight="1"
+        android:paddingLeft="16dp">
+        <TextView
+            android:text="Clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listItemForecastTextView" />
+        <TextView
+            android:text="Tomorrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listItemDateTextView" />
+    </LinearLayout>
+<!--right side high/low temp layout-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="81"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listItemHighTextView" />
+        <TextView
+            android:text="68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listItemLowTextView" />
+    </LinearLayout>
+</LinearLayout>
